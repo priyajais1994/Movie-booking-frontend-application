@@ -1,0 +1,10 @@
+
+
+.rs-table-body-row-wrapper{
+    min-height : 300px;
+}
+
+.rs-table{
+    min-height : 300px;
+    border: 2px solid black
+}
