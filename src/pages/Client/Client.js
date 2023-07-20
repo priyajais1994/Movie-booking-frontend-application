@@ -4,33 +4,32 @@ import Navbar from "../../component/commons/Navbar/Navbar";
 import {  useEffect, useState } from "react";
 import { getAllTheatres } from "../../api/theatre.api";
 import { getAllMovies } from "../../api/movie.api";
-// import { getAllBookings } from "../../api/booking.api";
 import CWidget from "../../component/CWidget/CWidget";
 import { keys } from "../../utils/constants";
-import TheatresTable from "../../component/Tables/TheatresTable/TheatreTable";
-import MoviesTable from "../../component/Tables/MoviesTable/MoviesTable";
-// import BookingsTable from "../../component/Tables/BookingsTable/BookingsTable";
+import TheatresTableClient from "../../component/Tables/TheatresTable/TheatresTableClient";
+import MoviesTableClient from "../../component/Tables/MoviesTable/MoviesTableClient";
+
 
 function Client() {
   const [theatresList, setTheatresList] = useState([]);
   const [moviesList, setMoviesList] = useState([]);
-  // const [bookingsList, setBookingsList] = useState([]);
+  
   const [counterInfo, setCounterInfo] = useState({
     theatres: 0,
     movies: 0,
-   // bookings: 0
+   
   });
 
   
 
   const [showTheatreTable, setShowTheatreTable] = useState(false);
   const [showMovieTable, setShowMovieTable] = useState(false);
- // const [showBookingTable, setShowBookingTable] = useState(false);
+ 
 
         const show = {};
          show[keys.THEATRE] = showTheatreTable;
          show[keys.MOVIE] = showMovieTable;
-         //show[keys.BOOKING] = showBookingTable;
+         
          
 
          const fetchtheatres= async()=>{
@@ -45,12 +44,7 @@ function Client() {
             counterInfo.movies = moviesList.data.length;
              setCounterInfo({...counterInfo});
         }
-       /* const fetchbookings= async()=>{
-            const bookingsList = await getAllBookings();
-            setBookingsList(bookingsList.data);
-            counterInfo.bookings = bookingsList.data.length;
-             setCounterInfo({...counterInfo});
-        }*/
+       
 
   const init = async () => {
     await Promise.all([fetchtheatres(), fetchmovies()]);
@@ -64,7 +58,7 @@ function Client() {
         
     setShowTheatreTable(false);
     setShowMovieTable(false);
-   // setShowBookingTable(false);
+
     
 
     if(id === keys.THEATRE)
@@ -75,10 +69,7 @@ function Client() {
     {
         setShowMovieTable(true);
     }
-   /* else if(id === keys.BOOKING)
-    {
-        setShowBookingTable(true);
-    }*/
+   
     
   }
 
@@ -101,19 +92,16 @@ function Client() {
             <CWidget id = {keys.MOVIE} show = {show} onWidgetClick={onWidgetClick } value={counterInfo.movies} icon="bi-film" text="Number of Movies" title="Movies" onClick={onWidgetClick} />
           </div>
 
-         {/* <div className="col">
-            <CWidget id = {keys.BOOKING} show = {show} onWidgetClick={onWidgetClick } value={counterInfo.bookings} icon="bi-card-list" text="Number of Bookings" title="Bookings" onClick={onWidgetClick} />
-         </div>*/}
-
+        
         </div>
 
-        {showTheatreTable && <TheatresTable theatresList={theatresList}/>}
+        {showTheatreTable && <TheatresTableClient theatresList={theatresList} setTheatresList={setTheatresList}/>}
         
         
-        {showMovieTable && <MoviesTable moviesList={moviesList}/>}
+        {showMovieTable && <MoviesTableClient moviesList={moviesList} setMoviesList={setMoviesList} />}
         
         
-       {/* {showBookingTable && <BookingsTable bookingsList={bookingsList}/>}*/}
+       
         
         
       </div>

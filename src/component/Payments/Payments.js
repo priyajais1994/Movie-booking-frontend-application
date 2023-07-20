@@ -3,14 +3,15 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import GooglePayButton from "@google-pay/button-react";
+import {Link} from "react-router-dom";
+// import GooglePayButton from "@google-pay/button-react";
 
 function Payments({show, setShow, movieDetails, theatreDetails, selectedSeats, confirmBooking, bookingDetails, closeModal}) {
 
   const handleClose = closeModal;
   const handleShow = () => setShow(true);
 
-  const [buttonColor, setButtonColor] = useState("default");
+ /* const [buttonColor, setButtonColor] = useState("default");
   const [buttonSizeMode, setButtonSizeMode] = useState("static");
   const [buttonWidth, setButtonWidth] = useState(240);
   const [paymentStatus, setPaymentStatus] = useState(null);
@@ -54,7 +55,7 @@ function Payments({show, setShow, movieDetails, theatreDetails, selectedSeats, c
     show(true);
   };
 
-  const disableButton = selectedSeats.length <= 0;
+  const disableButton = selectedSeats.length <= 0; */
   
 
   
@@ -104,7 +105,8 @@ function Payments({show, setShow, movieDetails, theatreDetails, selectedSeats, c
 
         </div>
         {
-            bookingDetails &&  paymentStatus === 'success' &&
+           //  bookingDetails &&  paymentStatus === 'success' &&
+                  bookingDetails && 
             <div>
                 {
                     bookingDetails.status === "SUCCESS" ? (
@@ -114,6 +116,13 @@ function Payments({show, setShow, movieDetails, theatreDetails, selectedSeats, c
                             <h5>Booking confirmed !</h5>
                             <small>Booking Id </small>
                             <p> {bookingDetails._id} </p>
+
+                            
+                            <Link to = "/">
+                            <p> go to landing page </p>
+                            </Link>
+
+                            
                      </div>
                     ) :
                          <div className = 'd-flex flex-column justify-content-between align-items-center'>
@@ -131,7 +140,16 @@ function Payments({show, setShow, movieDetails, theatreDetails, selectedSeats, c
             Close
           </Button>
 
-          {!bookingDetails && !disableButton && (
+           { !bookingDetails &&
+          <Button variant="primary" size="lg" onClick={confirmBooking} >
+            Confirm payment 
+          </Button>
+            }
+
+
+
+
+        { /* {!bookingDetails && !disableButton && (
             <GooglePayButton
               environment="TEST" // Set your desired environment (TEST or PRODUCTION)
               buttonColor={buttonColor}
@@ -142,7 +160,7 @@ function Payments({show, setShow, movieDetails, theatreDetails, selectedSeats, c
               style={{ width: buttonWidth, height: buttonHeight }}
               onClick={confirmBooking}
             />
-)}
+        )} */ }
            
         </Modal.Footer>
       </Modal>

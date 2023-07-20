@@ -2,7 +2,9 @@
 import axios from "axios";
 import { TOKEN } from '../utils/constants';
 
- const BASE_URL = "http://localhost:8000";
+const BASE_URL = "https://mba-backend-app.onrender.com";
+
+//  const BASE_URL = "http://localhost:8000";
 
 
 
@@ -52,4 +54,38 @@ export async function createnewmovie(movie)
             "x-access-token": localStorage.getItem(TOKEN)
         }
     }); 
+}
+// update movie by id 
+
+export const updateMoviesById = async (movieId, updatedData)=>{
+
+    try{
+ const res= await axios.put(`${BASE_URL}/mba/api/v1/movies/${movieId}`,updatedData, {headers:{
+     'x-access-token':localStorage.getItem(TOKEN)
+ }})
+
+ return res;
+
+}
+catch(err){
+ console.log(err);
+}
+
+}
+// delete movie by id
+
+export const deleteMoviesById = async (movieId)=>{
+
+    try{
+ const res= await axios.delete(`${BASE_URL}/mba/api/v1/movies/${movieId}`, {headers:{
+     'x-access-token':localStorage.getItem(TOKEN)
+ }})
+
+ return res;
+
+}
+catch(err){
+ console.log(err);
+}
+
 }

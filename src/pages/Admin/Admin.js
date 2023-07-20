@@ -120,15 +120,15 @@ function Admin()
           
         
 
-        {showTheatreTable && <TheatresTable theatresList={theatresList}/>}
+        {showTheatreTable && <TheatresTable theatresList={theatresList} setTheatresList={setTheatresList}/>}
          
-        {showMovieTable && <MoviesTable moviesList={moviesList}/>}
+        {showMovieTable && <MoviesTable moviesList={moviesList} setMoviesList={setMoviesList}/>}
        
         
-        {showBookingTable && <BookingsTable bookingsList={bookingsList}/>}
+        {showBookingTable && <BookingsTable bookingsList={bookingsList} setBookingsList={setBookingsList}/>}
         
              
-        { showUserTable && <UsersTable usersList={usersList}/>}
+        { showUserTable && <UsersTable usersList={usersList} setUsersList={setUsersList} />}
         
          </div>
 

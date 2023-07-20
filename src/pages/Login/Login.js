@@ -1,64 +1,24 @@
+import { useLocation } from "react-router-dom";
+import LoginForm from "./LoginForm";
+import SignUpForm from "./SignUpForm";
 
-import {Formik, Form, Field, ErrorMessage} from "formik";
-import { useLogin } from "../../hooks/login.hooks";
-import { formvalidator } from "../../validators/login.form.validator";
 
 
 function Login(){
 
-    const {initialStates, onLogin} = useLogin();
+    
+
+    const location = useLocation();
+    console.log(location);
+    const isLoginPage = (location.pathname == "/login");
 
     
-    return(
-        <div className="bg-dark vh-100 d-flex justify-content-center align-items-center text-center text-white">
+    return <>
 
-            <div style = {{border:"1px-solid-white"}} className= "p-5">
+       {isLoginPage && <LoginForm/>}
 
-                <div className="row">
-                    <h2> login </h2>
-
-                    <div>
-                        <Formik 
-                          initialValues={initialStates}
-                          validate= {formvalidator}
-
-                          onSubmit= {onLogin}
-                          >
-
-                          {({isSubmitting}) => (
-
-                            <Form className="d-flex flex-column justify-content-center align-items-center">
-
-                                <Field
-
-                                    type = "text"
-                                    name= "userId"
-                                    placeholder = "enter your userId"
-                                    className = "form-control m-2"
-                                   
-                                     />
-                                    <ErrorMessage name = "userId" component = "div"/>
-
-                                    <Field
-                                      type = "password"
-                                      name = "password"
-                                      placeholder = "enter password"
-                                      className = "form-control m-2"
-                                      />
-                                      <ErrorMessage name = "password" component = "div"/>
-
-                                      <button className="form-control m-2" type = "submit" disabled={isSubmitting}> Submit </button>
-
-                                
-                            </Form>
-                          )}
-
-                        </Formik>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    )
+       {!isLoginPage &&  <SignUpForm/>}
+    </>
+        
 }
 export default Login;
